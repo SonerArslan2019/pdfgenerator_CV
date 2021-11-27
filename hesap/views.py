@@ -49,13 +49,26 @@ def pdf_generate(request, pk):
         'hesap': hesap
     }
     template = loader.get_template('cv.html')  # template'i değişkene atadık
-    html = template.render(context)  # templateimiz data aldığından içeri data olarak context'i yolladık
+    html = template.render(
+        context)  # templateimiz data aldığından içeri data olarak context'i yolladık, context i render ediyoruz.
     options = {
         'page-size': 'Letter',
-        'encoding': 'UTF-8'
+        'margin-top': '0.75in',
+        'margin-right': '0.75in',
+        'margin-bottom': '0.75in',
+        'margin-left': '0.75in',
+        'encoding': "UTF-8",
+        'no-outline': None
     }  # ayarları belirledik.
     css = ['static/style.css']  # ilgili css dosyalarımızın yolunu veriyoruz
-    pdf = pdfkit.from_string(html, False, options,
+
+    config = pdfkit.configuration(wkhtmltopdf='/usr/bin/wkhtmltopdf')
+    """
+    config ile wkhtmltopdf yolunu belirtip, pdf de configuration=config, ile gosterildi
+    bu eklemenin olup olmamasi bilgisayarda calismasini engellemedi.
+    """
+
+    pdf = pdfkit.from_string(html, False, options, configuration=config,
                              css=css)  # html değişkenini pdf olarak yazacak, ayarları options olacak, False -> oluşturduğum bu pdf'i şimdilik bellekte tutmak istiyorum anlamına gelir
     response = HttpResponse(pdf, content_type='application/pdf')  # response instance oluşturduk
     response[

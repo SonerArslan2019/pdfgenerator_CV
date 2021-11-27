@@ -1,4 +1,4 @@
-    .msg {
+.msg {
     padding: 10px;
     background: #222;
     position: relative;
@@ -19,6 +19,7 @@
 .msg a:hover {
     background: #266400;
 }
+
 body {
     font-family: Georgia;
     color: #444;
@@ -137,8 +138,6 @@ p.enlarge span {
 }
 
 
-
-
 a#pdf {
     display: block;
     float: left;
@@ -174,7 +173,8 @@ a#pdf:hover {
     border: none;
 }
 
-.skills-list {}
+.skills-list {
+}
 
 .skills-list ul {
     margin: 0;
